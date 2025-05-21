@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 20 14.3% 4.1%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --primary: 210 79% 46%;
+  --primary-foreground: 211 100% 99%;
+  --primary-light: 210 79% 60%;
+  --primary-dark: 210 79% 32%;
+  --secondary: 340 100% 32%;
+  --secondary-foreground: 0 0% 98%;
+  --secondary-light: 340 100% 46%;
+  --secondary-dark: 340 100% 23%;
+  --accent: 60 4.8% 95.9%;
+  --accent-foreground: 24 9.8% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --destructive-light: 0 84.2% 70%;
+  --destructive-dark: 0 84.2% 40%;
+  --success: 122 39% 49%;
+  --success-light: 122 39% 65%;
+  --success-dark: 122 39% 35%;
+  --success-foreground: 0 0% 100%;
+  --warning: 36 100% 50%;
+  --warning-light: 36 100% 70%;
+  --warning-dark: 36 100% 35%;
+  --warning-foreground: 0 0% 20%;
+  --neutral: 0 0% 62%;
+  --neutral-light: 0 0% 96%;
+  --neutral-dark: 0 0% 13%;
+  --chart-1: 210 79% 46%;
+  --chart-2: 340 100% 32%;
+  --chart-3: 122 39% 49%;
+  --chart-4: 36 100% 50%;
+  --chart-5: 270 59% 50%;
+  --sidebar-background: 0 0% 100%;
+  --sidebar-foreground: 20 14.3% 4.1%;
+  --sidebar-primary: 210 79% 46%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 210 79% 96%;
+  --sidebar-accent-foreground: 210 79% 46%;
+  --sidebar-border: 20 5.9% 90%;
+  --sidebar-ring: 20 14.3% 4.1%;
+  --ring: 20 14.3% 4.1%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 210 79% 46%;
+  --primary-foreground: 0 0% 100%;
+  --primary-light: 210 79% 60%;
+  --primary-dark: 210 79% 32%;
+  --secondary: 340 100% 52%;
+  --secondary-foreground: 0 0% 98%;
+  --secondary-light: 340 100% 65%;
+  --secondary-dark: 340 100% 40%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --destructive-light: 0 62.8% 40%;
+  --destructive-dark: 0 62.8% 20%;
+  --success: 122 39% 49%;
+  --success-light: 122 39% 65%;
+  --success-dark: 122 39% 35%;
+  --success-foreground: 0 0% 100%;
+  --warning: 36 100% 50%;
+  --warning-light: 36 100% 70%;
+  --warning-dark: 36 100% 35%;
+  --warning-foreground: 0 0% 20%;
+  --neutral: 0 0% 62%;
+  --neutral-light: 0 0% 25%;
+  --neutral-dark: 0 0% 90%;
+  --chart-1: 210 79% 60%;
+  --chart-2: 340 100% 60%;
+  --chart-3: 122 39% 60%;
+  --chart-4: 36 100% 60%;
+  --chart-5: 270 59% 60%;
+  --sidebar-background: 240 10% 3.9%;
+  --sidebar-foreground: 0 0% 98%;
+  --sidebar-primary: 210 79% 60%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 210 79% 20%;
+  --sidebar-accent-foreground: 210 79% 60%;
+  --sidebar-border: 240 3.7% 15.9%;
+  --sidebar-ring: 240 4.9% 83.9%;
+  --ring: 240 4.9% 83.9%;
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v139/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+  
+  /* Styling for badge-like status indicators */
+  .status-pending {
+    @apply px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-warning-light text-warning-dark;
+  }
+  
+  .status-approved {
+    @apply px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-success-light text-success-dark;
+  }
+  
+  .status-rejected {
+    @apply px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-destructive-light text-destructive-dark;
+  }
+}
