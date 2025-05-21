@@ -26,9 +26,10 @@ const expenseFormSchema = z.object({
     errorMap: () => ({ message: "Please select a category" }),
   }),
   description: z.string().min(1, "Description is required"),
-  receipt: z.instanceof(FileList)
-    .refine(files => files.length > 0, "Receipt is required")
-    .transform(files => files[0]),
+  receipt: z.any()
+    .refine(val => val instanceof FileList || (val instanceof File), "Receipt must be a file")
+    .refine(val => val instanceof FileList ? val.length > 0 : true, "Receipt is required")
+    .transform(val => val instanceof FileList ? val[0] : val),
 });
 
 type ExpenseFormValues = z.infer<typeof expenseFormSchema>;
@@ -55,8 +56,12 @@ export function NewExpenseModal({ onClose, onSuccess }: NewExpenseModalProps) {
       formData.append("description", values.description);
       formData.append("receipt", values.receipt);
       
+      // Get auth token from localStorage
+      const token = localStorage.getItem('auth_token');
+      
       const response = await fetch('/api/expenses', {
         method: 'POST',
+        headers: token ? { 'Authorization': `Bearer ${token}` } : {},
         body: formData,
         credentials: 'include',
       });
