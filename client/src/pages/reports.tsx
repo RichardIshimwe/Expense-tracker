@@ -18,6 +18,7 @@ export default function ReportsPage() {
   
   const [activeTab, setActiveTab] = useState("activity");
   const [exportStatus, setExportStatus] = useState<ExpenseStatus | "all">("all");
+  const [exportDateRange, setExportDateRange] = useState<"all" | "thisMonth" | "lastMonth" | "thisYear">("all");
 
   // Check if user has permission to view this page
   if (!hasAnyRole([UserRole.MANAGER, UserRole.ADMIN])) {
@@ -56,10 +57,22 @@ export default function ReportsPage() {
 
   // Handle export
   const handleExport = () => {
-    // Redirect to the export endpoint with status filter
-    const exportUrl = exportStatus === "all" 
-      ? '/api/reports/export/expenses' 
-      : `/api/reports/export/expenses?status=${exportStatus}`;
+    // Build query params for export with filters
+    let exportUrl = '/api/reports/export/expenses';
+    const params = new URLSearchParams();
+    
+    if (exportStatus !== "all") {
+      params.append('status', exportStatus);
+    }
+    
+    if (exportDateRange !== "all") {
+      params.append('dateRange', exportDateRange);
+    }
+    
+    // Add query params if any exist
+    if (params.toString()) {
+      exportUrl += `?${params.toString()}`;
+    }
     
     window.open(exportUrl, '_blank');
     
@@ -106,7 +119,7 @@ export default function ReportsPage() {
       if (log.action === 'EXPENSE_CREATED') {
         return (
           <>
-            New expense of <strong>${log.expense.amount.toFixed(2)}</strong> for <span className="capitalize">{log.expense.category}</span> submitted by <span className="font-medium">{log.expense.ownerName}</span>
+            New expense of <strong>RWF {log.expense.amount.toFixed(2)}</strong> for <span className="capitalize">{log.expense.category}</span> submitted by <span className="font-medium">{log.expense.ownerName}</span>
           </>
         );
       }
@@ -209,22 +222,42 @@ export default function ReportsPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
-                <div>
-                  <h3 className="text-sm font-medium text-neutral-dark mb-2">Filter by Status</h3>
-                  <Select 
-                    value={exportStatus} 
-                    onValueChange={(value) => setExportStatus(value as ExpenseStatus | "all")}
-                  >
-                    <SelectTrigger className="w-full sm:w-72">
-                      <SelectValue placeholder="Select status" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Statuses</SelectItem>
-                      <SelectItem value={ExpenseStatus.PENDING}>Pending</SelectItem>
-                      <SelectItem value={ExpenseStatus.APPROVED}>Approved</SelectItem>
-                      <SelectItem value={ExpenseStatus.REJECTED}>Rejected</SelectItem>
-                    </SelectContent>
-                  </Select>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <h3 className="text-sm font-medium text-neutral-dark mb-2">Filter by Status</h3>
+                    <Select 
+                      value={exportStatus} 
+                      onValueChange={(value) => setExportStatus(value as ExpenseStatus | "all")}
+                    >
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select status" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Statuses</SelectItem>
+                        <SelectItem value={ExpenseStatus.PENDING}>Pending</SelectItem>
+                        <SelectItem value={ExpenseStatus.APPROVED}>Approved</SelectItem>
+                        <SelectItem value={ExpenseStatus.REJECTED}>Rejected</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-sm font-medium text-neutral-dark mb-2">Filter by Date Range</h3>
+                    <Select 
+                      value={exportDateRange} 
+                      onValueChange={(value) => setExportDateRange(value as "all" | "thisMonth" | "lastMonth" | "thisYear")}
+                    >
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select date range" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Time</SelectItem>
+                        <SelectItem value="thisMonth">Current Month</SelectItem>
+                        <SelectItem value="lastMonth">Last Month</SelectItem>
+                        <SelectItem value="thisYear">This Year</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
                 
                 <div className="bg-neutral-light p-4 rounded-md">
@@ -253,10 +286,11 @@ export default function ReportsPage() {
             <CardFooter>
               <Button 
                 onClick={handleExport}
-                className="bg-primary hover:bg-primary-dark text-white"
+                className="bg-primary hover:bg-primary-dark text-white w-full md:w-auto"
+                size="lg"
               >
                 <span className="material-icons text-sm mr-2">file_download</span>
-                Export as CSV
+                Download Expense Report (CSV)
               </Button>
             </CardFooter>
           </Card>
