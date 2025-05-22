@@ -27,8 +27,8 @@ const expenseFormSchema = z.object({
   }),
   description: z.string().min(1, "Description is required"),
   receipt: z.any()
-    .refine(val => val instanceof FileList || (val instanceof File), "Receipt must be a file")
-    .refine(val => val instanceof FileList ? val.length > 0 : true, "Receipt is required")
+    .refine(val => val instanceof FileList || (val instanceof File), "Invoice must be a file")
+    .refine(val => val instanceof FileList ? val.length > 0 : true, "Invoice is required")
     .transform(val => val instanceof FileList ? val[0] : val),
 });
 
@@ -206,7 +206,7 @@ export function NewExpenseModal({ onClose, onSuccess }: NewExpenseModalProps) {
                 name="receipt"
                 render={({ field: { onChange, value, ...fieldProps } }) => (
                   <FormItem className="sm:col-span-6">
-                    <FormLabel>Receipt</FormLabel>
+                    <FormLabel>Invoice</FormLabel>
                     <FormControl>
                       <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                         <div className="space-y-1 text-center">
@@ -214,7 +214,7 @@ export function NewExpenseModal({ onClose, onSuccess }: NewExpenseModalProps) {
                             <div className="mb-3">
                               <img 
                                 src={previewUrl} 
-                                alt="Receipt preview" 
+                                alt="Invoice preview" 
                                 className="mx-auto h-32 object-cover rounded-md"
                               />
                             </div>

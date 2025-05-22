@@ -150,7 +150,7 @@ export function ExpenseModal({ expenseId, onClose }: ExpenseModalProps) {
                 <div className="sm:col-span-3">
                   <label className="block text-sm font-medium text-neutral-main">Amount</label>
                   <div className="mt-1 text-sm text-neutral-dark">
-                    ${expenseData.expense.amount.toFixed(2)}
+                    RWF {expenseData.expense.amount.toFixed(2)}
                   </div>
                 </div>
                 <div className="sm:col-span-6">
@@ -160,14 +160,14 @@ export function ExpenseModal({ expenseId, onClose }: ExpenseModalProps) {
                   </div>
                 </div>
                 <div className="sm:col-span-6">
-                  <label className="block text-sm font-medium text-neutral-main">Receipt</label>
+                  <label className="block text-sm font-medium text-neutral-main">Invoice</label>
                   <div className="mt-1">
                     <img 
                       src={`/api/expenses/${expenseData.expense.id}/receipt`} 
-                      alt="Receipt" 
+                      alt="Invoice" 
                       className="h-40 w-auto object-cover rounded-md"
                       onError={(e) => {
-                        e.currentTarget.src = 'https://via.placeholder.com/800x600?text=Receipt+Not+Available';
+                        e.currentTarget.src = 'https://via.placeholder.com/800x600?text=Invoice+Not+Available';
                       }}
                     />
                   </div>
