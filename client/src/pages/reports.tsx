@@ -92,14 +92,14 @@ export default function ReportsPage() {
       if (log.action === 'EXPENSE_APPROVED') {
         return (
           <>
-            <span className="capitalize">{log.expense.category}</span> expense for <strong>${log.expense.amount.toFixed(2)}</strong> has been approved by <span className="font-medium">{log.userName}</span>
+            <span className="capitalize">{log.expense.category}</span> expense for <strong>RWF {log.expense.amount.toFixed(2)}</strong> has been approved by <span className="font-medium">{log.userName}</span>
           </>
         );
       }
       if (log.action === 'EXPENSE_REJECTED') {
         return (
           <>
-            <span className="capitalize">{log.expense.category}</span> expense for <strong>${log.expense.amount.toFixed(2)}</strong> has been rejected by <span className="font-medium">{log.userName}</span>
+            <span className="capitalize">{log.expense.category}</span> expense for <strong>RWF {log.expense.amount.toFixed(2)}</strong> has been rejected by <span className="font-medium">{log.userName}</span>
           </>
         );
       }

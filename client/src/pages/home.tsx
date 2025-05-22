@@ -11,7 +11,7 @@ export default function HomePage() {
 
   useEffect(() => {
     // If already logged in, redirect to dashboard
-    if (isAuthenticated()) {
+    if (isAuthenticated === true) {
       setLocation("/dashboard");
     }
   }, [isAuthenticated, setLocation]);

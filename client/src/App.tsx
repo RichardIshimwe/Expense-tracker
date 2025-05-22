@@ -12,12 +12,12 @@ import Reports from "@/pages/reports";
 import Settings from "@/pages/settings";
 import Login from "@/pages/login";
 import Signup from "@/pages/signup";
-
+import Home from "@/pages/home";
 
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Dashboard} />
+      <Route path="/" component={Home} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/expenses" component={Expenses} />
       <Route path="/expenses/:id" component={Expenses} />
