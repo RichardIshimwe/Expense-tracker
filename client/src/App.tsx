@@ -11,6 +11,8 @@ import Team from "@/pages/team";
 import Reports from "@/pages/reports";
 import Settings from "@/pages/settings";
 import Login from "@/pages/login";
+import Signup from "@/pages/signup";
+
 
 function Router() {
   return (
@@ -24,6 +26,7 @@ function Router() {
       <Route path="/reports" component={Reports} />
       <Route path="/settings" component={Settings} />
       <Route path="/login" component={Login} />
+      <Route path="/signup" component={Signup} />
       <Route component={NotFound} />
     </Switch>
   );
